@@ -1,45 +1,68 @@
 <?php include("connection/config.php") ?>
-<!doctype html>
-<html lang="en">
+
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <title>Task Management system</title>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
 <body>
+    <div class="container w-25 mx-auto my-5 py-5">
+        <div class="card pb-5 pt-3 px-2">
+          <div class="card-body">
+          <h1 class="text-center">Login</h1>
+        <?php
+        // Start the session
+        session_start();
 
-    <section class="p-5">
-        <div class="container">
-            <div class="form w-25 mx-auto">
-                <h5 class="py-5">Task Management system</h5>
-                <p class="text-danger">Login you Account</p>
-                <a href="sign.php" class="btn btn-sm btn-primary">  Create Account</a>
-                <form action="loginprocess/login.php" method="POST" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                </form>
+        // Check if the user is already logged in ( secure page)
+        if (isset($_SESSION['email'])) {
+            header('Location: dashboard.php');
+            exit;
+        }
+
+        if (isset($_POST['submit'])) {
+            $email = $_POST['email'];
+            $password = md5($_POST['password']);
+
+            $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+            $result = mysqli_query($conn, $query);
+
+            // Check if the query returned exactly one row
+            if (mysqli_num_rows($result) == 1) {
+                $user = $result->fetch_assoc();
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['name'] = $user['name'];
+                header('Location: dashboard.php');
+                exit;
+            } else {
+                echo "<p>Invalid email or password.</p>";
+            }
+
+            // Close the database connection
+            mysqli_close($conn);
+        }
+        ?>
+        <form method="post" action="">
+            <div class="mb-3">
+                <label for="email">email:</label>
+                <input type="text" class="form-control" name="email" required>
             </div>
+            <div class="mb-3">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <input type="submit" class="btn btn-danger btn-sm" name="submit" value="Login">
+            <a class="ps-5 text-decoration-none" href="sign.php" role="button"> Register </a>
+        </form>
+          </div>
         </div>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 
 </html>

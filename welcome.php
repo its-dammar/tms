@@ -1,54 +1,51 @@
-<?php
-include("connection/config.php");
-session_start();
-include("secure.php");
-?>
 
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <title>Task Management System</title>
-</head>
-
+<?php require("inc/header.php"); ?>
 <body>
-    <nav class="container p-3 mt-3 bg-light" >
-        <ul class="nav">
-        <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="welcome.php">Home </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="create-task.php">Create Task</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="manage-task.php">Manage Task</a>
-            </li>
-            <li class="dropdown open d-flex">
-                <a class="nav-link dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Account
-                </a>
-                <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="loginprocess/logout.php">Logout</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
-
+<?php require("inc/navbar.php"); ?>
     <section>
-        <div class="container">
-            <img src="" class="card-img-top" alt="">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-3">
+                    <div class="card shadow mx-auto">
+                        <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="..." width="250px" height="230px" style="object-fit:cover;">
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-sm px-5 d-block text-center" href="manage-task.php" role="button">
+                                <p class="card-title">Tasks</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-3">
+                    <div class="card shadow mx-auto">
+                        <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="..." width="250px" height="230px" style="object-fit:cover;">
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-sm px-5 d-block text-center" href="manage-file.php" role="button">
+                                <p class="card-title">Files</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-3">
+                    <div class="card shadow mx-auto">
+                        <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="..." width="250px" height="230px" style="object-fit:cover;">
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-sm px-5 d-block text-center" href="manage-choosefile.php" role="button">
+                                <p class="card-title">Choose files</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-3">
+                    <div class="card shadow mx-auto">
+                        <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="..." width="250px" height="230px" style="object-fit:cover;">
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-sm px-5 d-block text-center" href="manage-settings.php" role="button">
+                                <p class="card-title">Settings</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+<?php require("inc/footer.php"); ?>
